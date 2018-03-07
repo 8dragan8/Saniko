@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Saniko baza</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="css\main.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="js\main.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <?php include('Head.html');?>
+    <title>Prikaz fakture</title>
 </head>
 <body>
 
@@ -19,9 +13,9 @@
 
  $faktura_id=$_POST['faktura'];
 
- echo $faktura_id;
+//  echo $faktura_id;
 
- print_r($_POST);
+//  print_r($_POST);
 
 
  function iscitavanje_fakture ($conn, $faktura_id) {
@@ -74,7 +68,11 @@
 
         
         <div class="row">
-            <div class="col-lg-12">
+        <div class="col-lg-1"> 
+               <?php include('index.php');?>
+            </div>
+
+            <div class="col-lg-10">
                 <table class="table table-striped table-hover table-condensed">
                     <thead class="thead-dark">
                         <tr>
