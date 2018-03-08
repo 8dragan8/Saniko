@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    <?php include('Head.html');?>
-    <title>Spisak poslova</title>
-</head>
-<body>
-
 <?php
  include "connection.php";
+ include "php\FUNKCgenerisanje fakture.php";
 
  global $conn;
 
@@ -15,69 +8,80 @@
  function iscitavanje_tabele ($conn) {
 
  $sql="SELECT
-        nalozi_2018.id as Sifra,
-        date_FORMAT(datum_naloga, '%d.%m.%Y') as Datum,
-        kupac as Kupac,
-        naziv_posla as Posao,
-        CONCAT(format(kolicina, 2), ' ', jedinica_mere) as Tiraz,
-        sledeci_korak as Status,
-        bruto_cena_SUM as Ukupno,
+        nalozi_2018.id,
+        date_FORMAT(datum_naloga, '%d.%m.%Y') as datum,
+        kupac,
+        naziv_posla,
+        kolicina,
+        jedinica_mere,
+        sledeci_korak,
+        bruto_cena_SUM,
         faktura_id,
-        broj_fakture_cist as Faktura
+        broj_fakture_cist
         FROM
         nalozi_2018
         INNER JOIN kupci on nalozi_2018.kupac_id = kupci.id_kupac
         LEFT JOIN fakture on nalozi_2018.faktura_id = fakture.id
-        ORDER BY nalozi_2018.id desc;";
+        ORDER BY id
+        LIMIT 5
+        ;";
         
-        $result = $conn->query($sql);
-        $fields = array_keys($result->fetch(PDO::FETCH_ASSOC));
-        var_dump( $fields);
+        $i=1;
 
+        foreach ($conn->query($sql) as $row) {
+            $i++;
 
-        echo "<thead>
-                <tr>";
-
-        foreach (array_keys($result->fetch(PDO::FETCH_ASSOC)) as $column) {
-            if ($column != 'faktura_id') {
-                echo "<th>$column</th>";
-            }
-              
-        }
-        
-        echo "</tr>
-            </thead>
-            <tbody>";
-
-        foreach ($result as $row) {
-            echo "<tr>
+            
+            echo "<tr class='red-harmonika'>
                     <th>
                         <form action='prikaz naloga.php' method='POST' role='form'>
                             <div class='form-group'>
-                                <input type='hidden' class='form-control ' name='nalog' value='" . $row[1] . "' >
-                                <input type='submit'  value='" .$row["Sifra"] . "' class='btn btn-default btn-xs'>
+                                <input type='hidden' class='form-control ' name='nalog' value='" . $row['id'] . "' >
+                                <input type='submit'  value='" .$row["id"] . "' class='btn btn-default btn-xs'>
                             </div>
                         </form>
                     </th>
-                    <th>" . $row["Datum"] ."</th>
-                    <th>" . $row["Kupac"] ."</th>
-                    <th>" . $row["Posao"] ."</th>
-                    <th class='text-right'>" . $row["Tiraz"] . "</th>
-                    <th class='text-center'>" . $row["Status"] ."</th>
-                    <th class='text-right'>" . number_format(round($row["Ukupno"],2), 2, '.', ' ') ."</th>
+                    <th>" . $row["datum"] ."</th>
+                    <th>" . $row["kupac"] ."</th>
+                    <th>" . $row["naziv_posla"] ."</th>
+                    <th class='text-right text-nowrap'>" . number_format($row["kolicina"], 2, '.', ' ') ." " . $row["jedinica_mere"] ."</th>
+                    <th class='text-center'>" . $row["sledeci_korak"] ."</th>
+                    <th class='text-right text-nowrap'>" . number_format(round($row["bruto_cena_SUM"],2), 2, '.', ' ') ."</th>
                     <th>
                         <form action='prikaz fakture.php' method='POST' role='form'>
                             <div class='form-group'>
                                 <input type='hidden' class='form-control ' name='faktura' value='" . $row['faktura_id'] . "' >
-                                <input type='submit'  value='" .$row["Faktura"] . "' class='btn btn-default btn-xs'>
+                                <input type='submit'  value='" .$row["broj_fakture_cist"] . "' class='btn btn-default btn-xs'>
                             </div>
                         </form>
+
+                    
                     </th>
-                </tr>";
+                </tr>
+                <tr class='collapse'>
+                            
+                <td colspan='8'>
+                    <div>
+                        
+                        <div class='col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1' >";
+                        
+                            
+                        iscitavanje_fakture ($conn, $row['faktura_id']);
+
+
+                        echo "
+                            
+                        </div>
+                        
+                    </div> 
+                </td>
+            </tr>                
+                
+                ";
         }
 
-        echo "</tbody>";
-
+        
+ 
     }        
 
 ?>
@@ -94,21 +98,82 @@
 
 
 
-            <div class="col-lg-10">
-                
-                        
-                        <table class="table table-striped table-hover table-condensed">
 
-                                <?php iscitavanje_tabele ($conn); ?>
 
-                        </table>
+
+            <!--  <div class="col-lg-10">                        
+                         <table class="table table-striped table-hover table-condensed">
+                             <thead>
+                                 <tr>
+                                     <th>Šifra</th>
+                                     <th>Datum</th>
+                                     <th>Kupac</th>
+                                     <th>Posao</th>
+                                     <th class='text-right'>Tiraž</th>
+                                     <th class="text-center">Status</th>
+                                     <th>Ukupna cena</th>
+                                     <th>Faktura</th>
+                                 </tr>
+                             </thead>
+                             <tbody>
+                                 <?php // iscitavanje_tabele ($conn); ?>
+                             </tbody>
+                         </table>
                 
-            </div>
+             </div> -->
+
+            
+
+
+             
         </div>
                 
 
     </div>
 
+    
+    <div class="container-fluid">
+        
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
+                
+                
+                
+                <table class="table table-condensed" style="border-collapse:collapse;">
+                    <thead>
+                                <tr>
+                                     <th>Šifra</th>
+                                     <th>Datum</th>
+                                     <th>Kupac</th>
+                                     <th>Posao</th>
+                                     <th class='text-right'>Tiraž</th>
+                                     <th class='text-center'>Status</th>
+                                     <th>Ukupna cena</th>
+                                     <th>Faktura</th>
+                                </tr>
+                    </thead>
+                    <tbody>
+                        <?php iscitavanje_tabele ($conn); ?>
+                    </tbody>
+                </div>
+            </div>
+            
+        </div>
+</table>
+
+
+<button type="button" class="btn btn-default">button</button>
+
+
+
+<script>
+$(document).ready(function(){
+    $(".red-harmonika").click(function(){
+        $(this).next().collapse('toggle');
+    });
+});
+
+</script>
 
     
 </body>

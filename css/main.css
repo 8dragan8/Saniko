@@ -2,3 +2,6 @@
     margin-bottom: 0px;
 }
 
+.hiddenRow {
+    padding: 0 !important;
+}

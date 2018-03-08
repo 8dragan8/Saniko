@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <?php include('Head.html');?>
-    <title>Prikaz fakture</title>
-</head>
-<body>
 
 <?php
  include "connection.php";
 
  global $conn;
 
- $faktura_id=$_POST['faktura'];
+//  $faktura_id=$_POST['faktura'];
 
 //  echo $faktura_id;
 
@@ -45,6 +38,28 @@
             ;";
 
 
+
+        echo     "
+
+
+                <table class='table table-striped table-hover table-condensed'>
+                    <thead class='thead-dark'>
+                        <tr>
+                            <th class='text-center'>Sifra</th>
+                            <th class='text-center'>Datum</th>
+                            <th class='text-center'>kupac</th>
+                            <th class='text-center'>Posao</th>
+                            <th class='text-center'>kolicina</th>
+                            <th class='text-center'>neto vrsta</th>
+                            <th class='text-right'>neto cena</th>
+                            <th class='text-center'>bruto vrsta</th>
+                            <th class='text-right'>bruto cena</th>
+                            <th class='text-right'>bruto cena sum</th>
+                        </tr>
+                    </thead>
+                    <tbody>";
+
+
         foreach ($conn->query($sql) as $row) {
             echo "<tr>
                         <th>
@@ -67,65 +82,32 @@
             </tr>";
         }
 
-    }   
-    
-function faktura_suma ($conn, $faktura_id) {
+      
 
-    $sql="SELECT sum(bruto_cena_SUM) as suma FROM nalozi_2018 where faktura_id = " . $faktura_id . ";";
-    foreach ($conn->query($sql) as $row) {
+    echo "                        <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th class='text-right'>Ukupno:</th>
+    <th class='text-right'>";
+    
+    $sql2="SELECT sum(bruto_cena_SUM) as suma FROM nalozi_2018 where faktura_id = " . $faktura_id . ";";
+    foreach ($conn->query($sql2) as $row) {
     echo number_format(round($row["suma"],2), 2, '.', ' ');
     }
+
+    echo " din</th>
+    </tr>
+</tbody>
+</table>
+
+";
 }
 
 ?>
     
-    <div class="container-fluid">
-
-        
-        <div class="row">
-
-
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <table class="table table-striped table-hover table-condensed">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th class='text-center'>Sifra</th>
-                            <th class='text-center'>Datum</th>
-                            <th class='text-center'>kupac</th>
-                            <th class='text-center'>Posao</th>
-                            <th class='text-center'>kolicina</th>
-                            <th class='text-center'>neto vrsta</th>
-                            <th class='text-right'>neto cena</th>
-                            <th class='text-center'>bruto vrsta</th>
-                            <th class='text-right'>bruto cena</th>
-                            <th class='text-right'>bruto cena sum</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php iscitavanje_fakture ($conn, $faktura_id); ?>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th class='col-lg-1 col-lg-offset-8 text-right'>Ukupno:</th>
-                            <th class='text-right'><?php faktura_suma ($conn, $faktura_id); ?> din</th>
-                        </tr>
-                    </tbody>
-                </table>
-
-                
-            </div>
-        </div>
-                
-
-    </div>
-
-
-    
-</body>
-</html>
