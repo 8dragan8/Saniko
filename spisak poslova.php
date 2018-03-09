@@ -23,7 +23,7 @@
         INNER JOIN kupci on nalozi_2018.kupac_id = kupci.id_kupac
         LEFT JOIN fakture on nalozi_2018.faktura_id = fakture.id
         ORDER BY id
-        LIMIT 5
+        
         ;";
         
         $i=1;
@@ -32,7 +32,7 @@
             $i++;
 
             
-            echo "<tr class='red-harmonika'>
+            echo "<tr class='red-harmonika phpFaktura'>
                     <th>
                         <form action='prikaz naloga.php' method='POST' role='form'>
                             <div class='form-group'>
@@ -63,7 +63,7 @@
                 <td colspan='8'>
                     <div>
                         
-                        <div class='col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1' >";
+                        <div class='col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1'>";
                         
                             
                         iscitavanje_fakture ($conn, $row['faktura_id']);
@@ -162,18 +162,9 @@
 </table>
 
 
-<button type="button" class="btn btn-default">button</button>
 
 
 
-<script>
-$(document).ready(function(){
-    $(".red-harmonika").click(function(){
-        $(this).next().collapse('toggle');
-    });
-});
-
-</script>
 
     
 </body>
