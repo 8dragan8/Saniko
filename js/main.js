@@ -5,7 +5,7 @@ $(document).ready(function(){
         $(this).next().collapse('toggle');
     });
    
-    $(".phpFaktura-dugme").click(function(e){
+    $(".phpBrNaloga-dugme").click(function(e){
     var red = this.parentNode.parentNode;
     console.log('dugme');
         $(red).toggleClass('active');

@@ -1,11 +1,17 @@
 <?php
  include "connection.php";
  include "php\FUNKCgenerisanje fakture.php";
+ include "php\FUNKCgenerisanje tabele.php";
 
  global $conn;
-
-
+ 
+ 
  function iscitavanje_tabele ($conn) {
+     
+     global $sql2;
+     global $sql3;
+     global $sql4;
+
 
     $sql="SELECT
             nalozi_2018.id,
@@ -26,15 +32,15 @@
             
             ;";
             
-    $i=1;
+    // $i=1;
 
     foreach ($conn->query($sql) as $row) {
-        $i++;
+        // $i++;
 
         
         echo "<tr class='red-harmonika'>
                 <th>
-                <button type='button' class='btn btn-default btn-xs' value=" .$row["id"] . ">" .$row["id"] . "</button>
+                <button type='button' class='btn btn-default btn-xs phpBrNaloga-dugme' value=" .$row["id"] . ">" .$row["id"] . "</button>
                 </th>
                 <th>" . $row["datum"] ."</th>
                 <th>" . $row["kupac"] ."</th>
@@ -48,11 +54,12 @@
             </tr>
             <tr class='collapse'>
             <td colspan='8'>
-                <div class='col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1'>";
-                    
+                <div class='col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1'>";                    
                         
-        iscitavanje_fakture ($conn, $row['faktura_id']);
-
+            // iscitavanje_fakture ($conn, $row['faktura_id']);
+                iscitavanje_naloga ($conn, $row["id"], $sql2);
+                iscitavanje_naloga ($conn, $row["id"], $sql3);
+                iscitavanje_naloga ($conn, $row["id"], $sql4);
 
         echo "</div>
             </td>
@@ -73,8 +80,10 @@
                <?php include('index.php');?>
             </div>
 
+        </div>
+        <div class="row">
    
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
 
                 <table class="table table-condensed" style="border-collapse:collapse;">
                     <thead class='text-white bg-blue'>
