@@ -8,9 +8,8 @@
  
  function iscitavanje_tabele ($conn) {
      
-     global $sql2;
-     global $sql3;
-     global $sql4;
+     global $DefinisaniPrikazi;
+
 
 
     $sql="SELECT
@@ -57,9 +56,10 @@
                 <div class='col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1'>";                    
                         
             // iscitavanje_fakture ($conn, $row['faktura_id']);
-                iscitavanje_naloga ($conn, $row["id"], $sql2);
-                iscitavanje_naloga ($conn, $row["id"], $sql3);
-                iscitavanje_naloga ($conn, $row["id"], $sql4);
+                iscitavanje_naloga ($conn, $row["id"], $DefinisaniPrikazi[1]);
+                iscitavanje_naloga ($conn, $row["id"], $DefinisaniPrikazi[2]);
+                iscitavanje_naloga ($conn, $row["id"], $DefinisaniPrikazi[3]);
+
 
         echo "</div>
             </td>
