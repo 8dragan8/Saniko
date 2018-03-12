@@ -11,6 +11,21 @@ $(document).ready(function(){
         $(red).toggleClass('active');
         $(red).next().collapse('toggle');
     });
+
+    $(".phpFaktura-dugme").click(function(e){
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "prikaz fakture.php"
+    //       }).done(function( data) {
+    //         alert( "Request is done" );
+    //       });
+
+        var post = this.value;
+        $.post('prikaz fakture.php', {post}, function(response){
+            // now you can use `response` came from your_file.php after execution
+        });
+    });
+
     
 });
 
