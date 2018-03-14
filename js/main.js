@@ -13,23 +13,37 @@ $(document).ready(function(){
     });
 
     $(".phpFaktura-dugme").click(function(e){
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "prikaz fakture.php"
-    //       }).done(function( data) {
-    //         alert( "Request is done" );
-    //       });
 
-        var post = this.value;
-        $.post('prikaz fakture.php', {post}, function(response){
-            // now you can use `response` came from your_file.php after execution
-        });
+        var parametar = this.value;
+        // $.post('prikaz fakture.php', {parametar}, function(response){
+            xmlhttp.open("POST", "gethint.php?q=" + str, true);
+            xmlhttp.send();
+                // });
     });
 
     
 });
 
-// function getButtonValue(e) {
-//     // $(e.currentTarget.parent.parent).toggleClass('bg-info');
-//     $(this).next().collapse('toggle');
-// }
+$(function () {
+
+    $('.form-faktura').on('submit', function (e) {
+        // $('#skriveno').next().collapse('toggle');
+
+      e.preventDefault();
+      var parametar = 'faktura=' + this.childNodes[1].childNodes[1].value;
+
+      $.ajax({
+        type: 'post',
+        url: 'prikaz fakture.php',
+        data: parametar,
+    }).done(
+        function (result) {
+          $('#txtHint-0').append(result);
+        }
+
+    )
+
+    });
+
+
+  });

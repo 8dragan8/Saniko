@@ -23,61 +23,63 @@
         INNER JOIN kupci on nalozi_2018.kupac_id = kupci.id_kupac
         LEFT JOIN fakture on nalozi_2018.faktura_id = fakture.id
         ORDER BY id
-        
         ;";
         
-        $i=1;
+        $i=0;
 
         foreach ($conn->query($sql) as $row) {
-            $i++;
-
+            
             
             echo "<tr class='red-harmonika phpFaktura'>
                     <th>
                         <form action='prikaz naloga.php' method='POST' role='form'>
                             <div class='form-group'>
                                 <input type='hidden' class='form-control ' name='nalog' value='" . $row['id'] . "' >
-                                <input type='submit'  value='" .$row["id"] . "' class='btn btn-default btn-xs'>
+                                <input type='submit'  value='" . $row["id"] . "' class='btn btn-default btn-xs'>
                             </div>
                         </form>
                     </th>
                     <th>" . $row["datum"] ."</th>
                     <th>" . $row["kupac"] ."</th>
                     <th>" . $row["naziv_posla"] ."</th>
-                    <th class='text-right text-nowrap'>" . number_format($row["kolicina"], 2, '.', ' ') ." " . $row["jedinica_mere"] ."</th>
-                    <th class='text-center'>" . $row["sledeci_korak"] ."</th>
-                    <th class='text-right text-nowrap'>" . number_format(round($row["bruto_cena_SUM"],2), 2, '.', ' ') ."</th>
+                    <th class='text-right text-nowrap'>" . number_format($row["kolicina"], 2, '.', ' ') . " " . $row["jedinica_mere"] . "</th>
+                    <th class='text-center'>" . $row["sledeci_korak"] . "</th>
+                    <th class='text-right text-nowrap'>" . number_format(round($row["bruto_cena_SUM"],2), 2, '.', ' ') . "</th>
                     <th>
-                        <form action='prikaz fakture.php' method='POST' role='form'>
+                        <form class='form-faktura'>
                             <div class='form-group'>
-                                <input type='hidden' class='form-control ' name='faktura' value='" . $row['faktura_id'] . "' >
-                                <input type='submit'  value='" .$row["broj_fakture_cist"] . "' class='btn btn-default btn-xs'>
+                                <input type='hidden' class='form-control ' name='faktura' value='" . $row['faktura_id'] . "'>
+                                <input type='submit'  value='" . $row["broj_fakture_cist"] . "' class='btn btn-default btn-xs'>
+                                <input type='hidden' class='form-control' name='container' value='txtHint-$i'>
                             </div>
                         </form>
 
                     
                     </th>
                 </tr>
-                <tr class='collapse'>
+                <tr class='collapse' id='skriveno'>
                             
-                <td colspan='8'>
-                    <div>
-                        
-                        <div class='col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1'>";
-                        
+                    <td colspan='8'>
+                        <div>
+                              
+                            <div class='col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1' id='txtHint-$i'>";
                             
-                        iscitavanje_fakture ($conn, $row['faktura_id']);
+                                
+                                // iscitavanje_fakture ($conn, $row['faktura_id']);
 
 
-                        echo "
+            echo "
+                                
+                            </div>
                             
-                        </div>
-                        
-                    </div> 
-                </td>
-            </tr>                
+                        </div> 
+                    </td>
+                </tr>                
                 
                 ";
+
+                $i++;
+
         }
 
         
