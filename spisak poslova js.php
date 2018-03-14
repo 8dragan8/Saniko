@@ -51,7 +51,7 @@
                 <button type='button' class='btn btn-default btn-xs phpFaktura-dugme' value=" .$row["faktura_id"] . ">" .$row["broj_fakture_cist"] . "</button>
                 </th>
             </tr>
-            <tr class='collapse'>
+            <tr class='collapse tamnija-bg'>
             <td colspan='8'>
                 <div class='col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1'>";                    
                         
@@ -85,8 +85,8 @@
    
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
 
-                <table class="table table-condensed" style="border-collapse:collapse;">
-                    <thead class='text-white bg-blue'>
+                <table class="table table-condensed">
+                    <thead>
                                 <tr>
                                      <th>Šifra</th>
                                      <th>Datum</th>
