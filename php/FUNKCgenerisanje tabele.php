@@ -2,17 +2,15 @@
 <?php
  include "connection.php";
 
- global $conn;
-
  $DefinisaniPrikazi = array (
      array(
             "Ime"=> "Faktura",
             
             "sql"=>"SELECT
-                nalozi_2018.id as id,
-                date_FORMAT(datum_naloga, '%d.%m.%Y') as datum,
-                fakturise AS FAKTURISE,
-                kupac AS  Kupac,
+                -- nalozi_2018.id as id,
+                -- date_FORMAT(datum_naloga, '%d.%m.%Y') as datum,
+                -- fakturise AS FAKTURISE,
+                -- kupac AS  Kupac,
                 naziv_posla  AS Posao,
                 CONCAT(format(kolicina, 2), ' ', jedinica_mere)  AS Tiraz,
                 Concat(format(inter_cena, 2), ' ', inter_cena_valuta, if(inter_cena_vrsta = 'kom', '/kom', '' )) as `Inter cena`,
@@ -138,7 +136,7 @@ function iscitavanje_naloga ($conn, $parametar, $prikaz) {
                 ";}
 }
 
-// iscitavanje_naloga ($conn, 201712520, $sql2);
+
 
 ?>
 
