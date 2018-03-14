@@ -15,13 +15,27 @@
                 CONCAT(format(kolicina, 2), ' ', jedinica_mere)  AS Tiraz,
                 Concat(format(inter_cena, 2), ' ', inter_cena_valuta, if(inter_cena_vrsta = 'kom', '/kom', '' )) as `Inter cena`,
                 Concat(format(ekster_cena, 2), ' ', ekster_cena_valuta, if(ekster_cena_vrsta = 'kom', '/kom', '' )) as `Ekster cena`,
-                format(bruto_cena_SUM, 2) as Ukupno,
+                Concat(format(bruto_cena_SUM, 2), ' ', ekster_cena_valuta) as Ukupno,
                 br_fakture as Faktura
             FROM
                 nalozi_2018
             JOIN kupci on kupci.id_kupac = nalozi_2018.kupac_id
             JOIN fakture on fakture.id = nalozi_2018.faktura_id
-            WHERE faktura_id = "
+            WHERE faktura_id = ",
+
+            // asocirajuce klase hedera
+
+            "klaseHed"=>array (
+                "text-left", "text-right", "text-right", "text-right", "text-right", "text-right"
+            ),
+
+            // asocirajuce klase kolona
+
+            "klaseRed"=>array (
+                "text-left", "text-right text-nowrap", "text-right", "text-right text-nowrap", "text-right text-nowrap", "text-right"
+                )
+                
+            
          ),
 
          
@@ -41,8 +55,22 @@
                 `nalozi_2018`
             INNER JOIN `nalozi_adast` on `nalozi_2018`.`id` = `nalozi_adast`.`id_Rnalog`
             INNER JOIN `kupci` on `nalozi_2018`.`kupac_id` = `kupci`.`id_kupac`
-            WHERE `id_Rnalog`= "
-         ),
+            WHERE `id_Rnalog`= ",
+
+            // asocirajuce klase hedera
+
+            "klaseHed"=>array (
+                "text-center", "text-center", "text-center", "text-center", "text-center", "text-center", "text-center", "text-center"
+            ),
+
+            // asocirajuce klase kolona
+
+            "klaseRed"=>array (
+                "text-center", "text-center", "text-center", "text-center", "text-center", "text-center", "text-center", "text-center"
+                )
+                
+
+        ),
 
          
      array(
@@ -59,9 +87,21 @@
                 `nalozi_2018`
             JOIN `nalozi_digitab` on `nalozi_2018`.`id` = `nalozi_digitab`.`id_Rnalog`
             JOIN `kupci` on `nalozi_2018`.`kupac_id` = `kupci`.`id_kupac`
-            WHERE `id_Rnalog`= "
-        
-        
+            WHERE `id_Rnalog`= ",
+
+            // asocirajuce klase hedera
+
+            "klaseHed"=>array (
+                "text-center", "text-center", "text-center", "text-center", "text-center", "text-center"
+            ),
+
+            // asocirajuce klase kolona
+
+            "klaseRed"=>array (
+                "text-center", "text-center", "text-center", "text-center", "text-center", "text-center"
+                )
+            
+
         ),
 
     
@@ -80,7 +120,21 @@
                     `nalozi_2018`
                 JOIN `nalozi_vf` on `nalozi_2018`.`id` = `nalozi_vf`.`id_Rnalog`
                 JOIN `kupci` on `nalozi_2018`.`kupac_id` = `kupci`.`id_kupac`
-                WHERE `id_Rnalog`= "
+                WHERE `id_Rnalog`= ",
+
+            // asocirajuce klase hedera
+
+            "klaseHed"=>array (
+                "text-left", "text-center", "text-right", "text-right", "text-right", "text-center", "text-center"
+            ),
+
+            // asocirajuce klase kolona
+
+            "klaseRed"=>array (
+                "text-left", "text-center", "text-right text-nowrap", "text-right", "text-right", "text-right", "text-left"
+                )
+    
+
         )
 
 );
@@ -91,9 +145,10 @@ function iscitavanje_naloga ($conn, $parametar, $prikaz) {
     $prikaz['sql'].= $parametar . ";";
 
     $data = $conn->query($prikaz['sql']);
-    $result = $data->fetchAll();
+    $result = $data->fetchAll(PDO::FETCH_ASSOC);
 
     // var_dump($result);
+    // echo "<br>";
     
     
     if (!$result){
@@ -105,14 +160,15 @@ function iscitavanje_naloga ($conn, $parametar, $prikaz) {
     {   
     
         $header=array_keys($result[0]);
-        // print_r ($header);
+        // print_r ($header ."<br>");
+        // print_r (count($header)."<br>");
     
              echo " <h3>" . $prikaz['Ime'] . "</h3>
              <table class='table table-condensed'>
                     <thead>
                         <tr>";
-                        for ($x = 0; $x < count($header); $x+=2) {
-                           echo " <th class='text-center'>$header[$x]</th>";
+                        for ($x = 0; $x < count($header); $x++) {
+                           echo " <th class='" . $prikaz['klaseHed'][$x] . "'>$header[$x]</th>";
                         }
                            
              echo "           </tr>
@@ -123,8 +179,8 @@ function iscitavanje_naloga ($conn, $parametar, $prikaz) {
 
                     for ($row = 0; $row < count($result); $row++) {
                         echo "<tr>";
-                        for ($col = 0; $col < count($result[0])/2; $col++) {
-                            echo "<th class='text-center'>" . $result[$row][$col] ."</th>";
+                        for ($col = 0; $col < count($result[0]); $col++) {
+                            echo "<th class='" . $prikaz['klaseRed'][$col] . "'>" . $result[$row][$header[$col]] ."</th>";
                         }
                         echo "</tr>";
 
