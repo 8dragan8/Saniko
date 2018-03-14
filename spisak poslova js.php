@@ -1,5 +1,5 @@
 <?php
- include "connection.php";
+ include "php\connection.php";
  include "php\FUNKCgenerisanje fakture.php";
  include "php\FUNKCgenerisanje tabele.php";
 

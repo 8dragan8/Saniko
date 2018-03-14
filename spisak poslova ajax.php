@@ -1,8 +1,8 @@
 <?php
- include "connection.php";
+ include "php\connection.php";
 
 
- global $conn;
+//  global $conn;
 
 
  function iscitavanje_tabele ($conn) {

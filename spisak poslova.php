@@ -1,6 +1,6 @@
 <?php
- include "connection.php";
- include "php\FUNKCgenerisanje fakture.php";
+ include "php\connection.php";
+//  include "php\FUNKCgenerisanje fakture.php";
 
  global $conn;
 
