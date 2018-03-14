@@ -69,59 +69,54 @@
 }        
 
 ?>
+
+<html>
+    <body>
     
-    <div class="container-fluid">
+        <div class="container-fluid">
 
-        
-        <div class="row">
+            
+            <div class="row">
 
 
-            <div class="col-lg-1"> 
-               <?php include('index.php');?>
+                <div class="col-lg-1"> 
+                <?php include('index.php');?>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+    
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
+
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Šifra</th>
+                                <th>Datum</th>
+                                <th>Kupac</th>
+                                <th>Posao</th>
+                                <th class='text-right'>Tiraž</th>
+                                <th class='text-center'>Status</th>
+                                <th>Ukupna cena</th>
+                                <th>Faktura</th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+                            <?php iscitavanje_tabele ($conn); ?>
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
             </div>
 
         </div>
-        <div class="row">
-   
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
-
-                <table class="table table-condensed">
-                    <thead>
-                                <tr>
-                                     <th>Šifra</th>
-                                     <th>Datum</th>
-                                     <th>Kupac</th>
-                                     <th>Posao</th>
-                                     <th class='text-right'>Tiraž</th>
-                                     <th class='text-center'>Status</th>
-                                     <th>Ukupna cena</th>
-                                     <th>Faktura</th>
-                                </tr>
-                    </thead>
-
-
-                    <tbody>
-                        <?php iscitavanje_tabele ($conn); ?>
-
-                        <tr>
-                            <th id="23">
-
-                            </th>
-                        </tr>
-                    </tbody>
-
-
-                </table>
-
-
-            </div>
-        </div>
-    </div>
-
-
-
-
-
     
-</body>
+    </body>
 </html>
