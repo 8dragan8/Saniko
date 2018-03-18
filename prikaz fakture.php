@@ -5,9 +5,14 @@
 
  $faktura=$_POST['faktura'];
 
+if ($faktura==0) {
+        echo "<span class='label label-warning'>Faktura nije pronadjena</span>";
+    }
+    else {
+        # code...
+        iscitavanje_naloga ($conn, $faktura, $DefinisaniPrikazi[0]);
+    }
 
-
- iscitavanje_naloga ($conn, $faktura, $DefinisaniPrikazi[0]);
 
 
 ?>
