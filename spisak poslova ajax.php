@@ -30,7 +30,8 @@
         foreach ($conn->query($sql) as $row) {
             
             
-            echo "<tr class='red-harmonika' id='" . $i ."-red'>
+            echo "
+                <tr class='red-harmonika' id='" . $i ."-red'>
                     <th>
                         <button type='button' class='btn btn-default btn-xs phpBrNaloga-dugme' onclick='nalog(this)' value=" .$row["id"] . " brojReda='$i'>" .$row["id"] . "</button>
                     </th>
@@ -44,14 +45,14 @@
                         <button type='button' class='btn btn-default btn-xs phpFaktura-dugme' onclick='faktura(this)' value=" .$row["faktura_id"] . " brojReda='$i'>" .$row["broj_fakture_cist"] . "</button>
                     </th>
                 </tr>
-                <tr class='collapse tamnija-bg'>
-                    <td colspan='8'>
-                        <div id='" . $i ."-skriveni-red'>";
+                    <tr class='collapse tamnija-bg'>
+                        <td colspan='8'>
+                            <div id='" . $i ."-skriveni-red' class='container'>
 
-            echo "</div>
-                    </td>
-                </tr>               
-                ";
+                            </div>
+                        </td>
+                    </tr>"
+            ;
 
             $i++;
 
@@ -62,11 +63,13 @@
 ?>
 
 <html>
+
+    
     <body>
         
         <div class="container-fluid">        
             <div class="row dynamic-color">
-                <div class="col-lg-1"> 
+                <div class="col-lg-6"> 
                 <?php include('index.php');?>
                 </div>            
             </div>
@@ -96,5 +99,7 @@
                 </div>
             </div>
         </div>
+
+
     </body>
 </html>
