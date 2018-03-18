@@ -14,9 +14,8 @@
                 
                 <div class="btn-group-vertical">
                     <a class="btn btn-default" href="index.php" role="button">Home</a>
-                    <a class="btn btn-default" href="spisak poslova.php" role="button">Spisak poslova</a>
-                    <a class="btn btn-default" href="spisak poslova js.php" role="button">Spisak poslova JS</a>
                     <a class="btn btn-default" href="spisak poslova ajax.php" role="button">Spisak poslova AJAX</a>
+                    <a class="btn btn-default" href="spisak poslova ajax tabs.php" role="button">Spisak poslova ajax tabs</a>
                 </div>
                 
             </div>            
