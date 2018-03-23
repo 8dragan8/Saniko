@@ -392,26 +392,46 @@ USE Saniko;
 
 
 
+-- SELECT
+--             nalozi_2018.id as id,
+--             date_FORMAT(datum_naloga, '%d.%m.%Y') as datum,
+--             fakturise,
+--             kupac,
+--             naziv_posla,
+--             kolicina,
+--             jedinica_mere,
+--             inter_cena_vrsta,
+--             inter_cena,
+--             inter_cena_valuta,
+--             ekster_cena_vrsta,
+--             ekster_cena,
+--             ekster_cena_valuta,
+--             sum(bruto_cena_SUM),
+--             br_fakture
+--             FROM
+--             nalozi_2018
+--             JOIN kupci on kupci.id_kupac = nalozi_2018.kupac_id
+--             JOIN fakture on fakture.id = nalozi_2018.faktura_id
+--             WHERE
+--             faktura_id = 55
+--             ;
+
+
+
+
 SELECT
-            nalozi_2018.id as id,
-            date_FORMAT(datum_naloga, '%d.%m.%Y') as datum,
-            fakturise,
-            kupac,
-            naziv_posla,
-            kolicina,
-            jedinica_mere,
-            inter_cena_vrsta,
-            inter_cena,
-            inter_cena_valuta,
-            ekster_cena_vrsta,
-            ekster_cena,
-            ekster_cena_valuta,
-            sum(bruto_cena_SUM),
-            br_fakture
-            FROM
-            nalozi_2018
-            JOIN kupci on kupci.id_kupac = nalozi_2018.kupac_id
-            JOIN fakture on fakture.id = nalozi_2018.faktura_id
-            WHERE
-            faktura_id = 55
-            ;
+                        nalozi_2018.id as Sifra,
+                        date_FORMAT(datum_naloga, '%d.%m.%Y') as Datum,
+                        kupac as Kupac,
+                        naziv_posla as Posao,
+                        concat(kolicina, jedinica_mere) as Tiraz,
+                        sledeci_korak as Status,
+                        Concat(format(bruto_cena_SUM, 2), ' ', ekster_cena_valuta) as Ukupno,
+                        faktura_id as Faktura,
+                        broj_fakture_cist as fakturaId
+                    FROM
+                        nalozi_2018
+                    INNER JOIN kupci on nalozi_2018.kupac_id = kupci.id_kupac
+                    LEFT JOIN fakture on nalozi_2018.faktura_id = fakture.id
+                    where sledeci_korak = 'zavrseno'
+                    ;

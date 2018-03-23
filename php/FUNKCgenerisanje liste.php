@@ -140,9 +140,9 @@
 );
 
 function iscitavanje_naloga ($conn, $parametar, $prikaz) {
-    
-    $prikaz['sql'].= "'" . $parametar . "' ;";
-    // var_dump($prikaz);
+    // print_r ($prikaz);
+
+    $prikaz['sql'].= $parametar . ";";
 
     $data = $conn->query($prikaz['sql']);
     $result = $data->fetchAll(PDO::FETCH_ASSOC);
@@ -171,7 +171,7 @@ function iscitavanje_naloga ($conn, $parametar, $prikaz) {
                            echo " <th class='" . $prikaz['klaseHed'][$x] . "'>$header[$x]</th>";
                         }
                            
-             echo "           </tr>
+             echo "           </tr> 
                     </thead>
                     <tbody>
                     ";
