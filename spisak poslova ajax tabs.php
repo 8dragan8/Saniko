@@ -5,9 +5,8 @@
 //  global $conn;
 
 
- function iscitavanje_tabele ($conn) {
 
-        $sql="SELECT
+$sql="SELECT
                 nalozi_2018.id,
                 date_FORMAT(datum_naloga, '%d.%m.%Y') as datum,
                 kupac,
@@ -24,6 +23,8 @@
                 LEFT JOIN fakture on nalozi_2018.faktura_id = fakture.id
                 ORDER BY id
                 ;";
+
+function iscitavanje_tabele ($conn, $sql, $parametri=0) {
         
         $i=0;
 
@@ -92,7 +93,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php iscitavanje_tabele ($conn); ?>
+                            <?php iscitavanje_tabele ($conn, $sql); ?>
                         </tbody>
                     </table>
                 </div>
