@@ -6,10 +6,8 @@ $(document).ready(function(){
         var idNaloga = this.getAttribute('idNaloga');
         var idfakture = this.getAttribute('idfakture');
 
-
-
         console.log('faktura');
-        $(this).toggleClass('active');
+        $(this).toggleClass('aktivniRed');
         $(this).next().collapse('toggle');
 
         if (!$(skriveniRed).attr("ucitano")) {
@@ -19,45 +17,8 @@ $(document).ready(function(){
 
     });
 
-    // $('.nav-tabs > li').click(function(){
-
-    //     var ckliknutiTab = $(this).find('a').attr('href');
-    //     $(this.parentNode).next('.tab-content').find('.active').toggleClass('in active').end();
-    //     $(this.parentNode).next('.tab-content').find(ckliknutiTab).addclass('in active').end();
-    // })
-   
-    
 });
 
-
-
-// function faktura (elem) {
-//         var ovo = elem.getAttribute('brojReda');
-//         var aktivniRed = '#' + ovo + '-red';
-//         var skriveniRed = '#' + ovo + '-skriveni-red';
-//         var idfakture = elem.value;
-//         $(aktivniRed).next().collapse('toggle');
-//         if (!$(elem).attr("ucitano")) {
-            
-//             ajaxUpit('prikaz fakture.php', idfakture, skriveniRed);
-//             $(elem).attr("ucitano", "true");
-//         }
-//     };
-
-
-
-// function nalog (elem) {
-//         var ovo = elem.getAttribute('brojReda');
-//         var aktivniRed = '#' + ovo + '-red';
-//         var skriveniRed = '#' + ovo + '-skriveni-red';
-//         var idNaloga = elem.value;
-//         $(aktivniRed).next().collapse('toggle');
-//         if (!$(elem).attr("ucitano")) {
-
-//             ajaxUpit('prikaz naloga.php', idNaloga, skriveniRed);
-//             $(elem).attr("ucitano", "true");
-//         }
-//     };
 
 
 function ajaxUpit (php, parametar, meta) {
@@ -99,9 +60,5 @@ function tabs (ovo, idNaloga, idfakture, skriveniRed) {
     
     ajaxUpit('prikaz naloga.php', idNaloga, menu1);
     ajaxUpit('prikaz fakture.php', idfakture, menu2);
-
-    
-
-
 
 };
