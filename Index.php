@@ -16,6 +16,7 @@
                     <a class="btn btn-default" href="index.php" role="button">Home</a>
                     <a class="btn btn-default" href="spisak poslova ajax.php" role="button">Spisak poslova AJAX</a>
                     <a class="btn btn-default" href="spisak poslova ajax tabs.php" role="button">Spisak poslova ajax tabs</a>
+                    <a class="btn btn-default" href="spisak poslova sa filtrima.php" role="button">spisak poslova sa filtrima</a>
                 </div>
                 
             </div>            
